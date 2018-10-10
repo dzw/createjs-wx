@@ -1,6 +1,6 @@
 import './js/libs/weapp-adapter';
 import './js/libs/symbol';
-import './js/createjs.min';
+import './js/createjs';
 import './js/WXGraphics';
 import './js/WXStageGL';
 import './js/WXLoader';
