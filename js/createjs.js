@@ -26,7 +26,7 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-this.createjs = this.createjs||{};
+window.createjs = window.createjs||{};
 
 
 //##############################################################################
