@@ -3415,7 +3415,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 					img.src = src;
 				}
 				a.push(img);
-				if (!img.getContext && !img.naturalWidth) {
+				if (!img.getContext && !img.width) {
 					this._loadCount++;
 					this.complete = false;
 					(function(o, src) { img.onload = function() { o._handleImageLoad(src); } })(this, src);
@@ -3522,7 +3522,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 
 		imgLoop:
 		for (var i=0, imgs=this._images; i<imgs.length; i++) {
-			var img = imgs[i], imgW = (img.width||img.naturalWidth), imgH = (img.height||img.naturalHeight);
+			var img = imgs[i], imgW = (img.width||img.width), imgH = (img.height||img.height);
 
 			var y = margin;
 			while (y <= imgH-margin-frameHeight) {
@@ -5494,7 +5494,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 	 * @return {Fill} Returns this Fill object for chaining or assignment.
 	 */
 	p.bitmap = function(image, repetition) {
-		if (image.naturalWidth || image.getContext || image.readyState >= 2) {
+		if (image.width || image.getContext || image.readyState >= 2) {
 			var o = this.style = Graphics._ctx.createPattern(image, repetition || "");
 			o.props = {image: image, repetition: repetition, type: "bitmap"};
 		}
@@ -10407,7 +10407,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 
 			// get the data into the texture or wait for it to load
 			image._storeID = storeID;
-			if (image.complete || image.naturalWidth || image._isCanvas) {	// is it already loaded
+			if (image.complete || image.width || image._isCanvas) {	// is it already loaded
 				this._updateTextureImageData(gl, image);
 			} else  {
 				image.addEventListener("load", this._updateTextureImageData.bind(this, gl, image));
@@ -11156,7 +11156,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 	 **/
 	p.isVisible = function() {
 		var image = this.image;
-		var hasContent = this.cacheCanvas || (image && (image.naturalWidth || image.getContext || image.readyState >= 2));
+		var hasContent = this.cacheCanvas || (image && (image.width || image.getContext || image.readyState >= 2));
 		return !!(this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent);
 	};
 
@@ -11231,7 +11231,7 @@ createjs.deprecate = function(fallbackMethod, name) {
 		var rect = this.DisplayObject_getBounds();
 		if (rect) { return rect; }
 		var image = this.image, o = this.sourceRect || image;
-		var hasContent = (image && (image.naturalWidth || image.getContext || image.readyState >= 2));
+		var hasContent = (image && (image.width || image.getContext || image.readyState >= 2));
 		return hasContent ? this._rectangle.setValues(0, 0, o.width, o.height) : null;
 	};
 
@@ -13371,8 +13371,8 @@ createjs.deprecate = function(fallbackMethod, name) {
 			var img = document.createElement("img");
 			img.src = canvas.toDataURL("image/png");
 			// work around a strange bug in Safari:
-			img.width = (src.width||src.naturalWidth);
-			img.height = (src.height||src.naturalHeight);
+			img.width = (src.width||src.width);
+			img.height = (src.height||src.height);
 			imgs.push(img);
 		}
 
@@ -13385,11 +13385,11 @@ createjs.deprecate = function(fallbackMethod, name) {
 
 			var frame = {image:img,rect:rect,regX:src.regX,regY:src.regY};
 			if (h) {
-				rect.x = (img.width||img.naturalWidth)-rect.x-rect.width; // update rect
+				rect.x = (img.width||img.width)-rect.x-rect.width; // update rect
 				frame.regX = rect.width-src.regX; // update registration point
 			}
 			if (v) {
-				rect.y = (img.height||img.naturalHeight)-rect.y-rect.height;  // update rect
+				rect.y = (img.height||img.height)-rect.y-rect.height;  // update rect
 				frame.regY = rect.height-src.regY; // update registration point
 			}
 			frames.push(frame);
